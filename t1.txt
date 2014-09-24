@@ -1,0 +1,181 @@
+廖雪峰的官方网站
+研究互联网产品和技术，提供原创中文精品教程
+
+
+廖雪峰的官方网站
+首页
+编程
+读书
+Python教程
+Git教程
+问答
+  请登录 
+ 
+
+Git教程
+
+Git简介
+Git的诞生
+集中式vs分布式
+安装Git
+创建版本库
+时光机穿梭
+版本回退
+工作区和暂存区
+管理修改
+撤销修改
+删除文件
+远程仓库
+添加远程库
+从远程库克隆
+分支管理
+创建与合并分支
+解决冲突
+分支管理策略
+Bug分支
+Feature分支
+多人协作
+标签管理
+创建标签
+操作标签
+使用GitHub
+自定义Git
+忽略特殊文件
+配置别名
+搭建Git服务器
+期末总结
+关于作者
+
+
+
+ 
+时光机穿梭
+
+428次阅读
+我们已经成功地添加并提交了一个readme.txt文件，现在，是时候继续工作了，于是，我们继续修改readme.txt文件，改成如下内容：
+
+Git is a distributed version control system.
+Git is free software.
+现在，运行git status命令看看结果：
+
+$ git status
+# On branch master
+# Changes not staged for commit:
+#   (use "git add <file>..." to update what will be committed)
+#   (use "git checkout -- <file>..." to discard changes in working directory)
+#
+#    modified:   readme.txt
+#
+no changes added to commit (use "git add" and/or "git commit -a")
+git status命令可以让我们时刻掌握仓库当前的状态，上面的命令告诉我们，readme.txt被修改过了，但还没有准备提交的修改。
+
+虽然Git告诉我们readme.txt被修改了，但如果能看看具体修改了什么内容，自然是很好的。比如你休假两周从国外回来，第一天上班时，已经记不清上次怎么修改的readme.txt，所以，需要用git diff这个命令看看：
+
+$ git diff readme.txt 
+diff --git a/readme.txt b/readme.txt
+index 46d49bf..9247db6 100644
+--- a/readme.txt
++++ b/readme.txt
+@@ -1,2 +1,2 @@
+-Git is a version control system.
++Git is a distributed version control system.
+ Git is free software.
+git diff顾名思义就是查看difference，显示的格式正是Unix通用的diff格式，可以从上面的命令输出看到，我们在第一行添加了一个“distributed”单词。
+
+知道了对readme.txt作了什么修改后，再把它提交到仓库就放心多了，提交修改和提交新文件是一样的两步，第一步是git add：
+
+$ git add readme.txt
+同样没有任何输出。在执行第二步git commit之前，我们再运行git status看看当前仓库的状态：
+
+$ git status
+# On branch master
+# Changes to be committed:
+#   (use "git reset HEAD <file>..." to unstage)
+#
+#       modified:   readme.txt
+#
+git status告诉我们，将要被提交的修改包括readme.txt，下一步，就可以放心地提交了：
+
+$ git commit -m "add distributed"
+[master ea34578] add distributed
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+提交后，我们再用git status命令看看仓库的当前状态：
+
+$ git status
+# On branch master
+nothing to commit (working directory clean)
+Git告诉我们当前没有需要提交的修改，而且，工作目录是干净（working directory clean）的。
+
+小结
+要随时掌握工作区的状态，使用git status命令。
+
+如果git status告诉你有文件被修改过，用git diff可以查看修改内容。
+
+您的支持是作者写作最大的动力！
+
+如果您喜欢这个教程，读后觉得收获很大，预期工资涨幅能超过30%，不妨小额赞助一下，让我有动力继续写出高质量的教程。
+
+请狠狠地点击下面的按钮：
+
+我要小额赞助
+
+教程没看明白？
+
+请在问答区提问，贴上代码和出错信息：
+
+去问答区交流
+
+ 上一篇：创建版本库   ···   下一篇：版本回退 
+
+喜欢这篇文章？
+
+赞
+蓝jiajia , 走过夏天... 等17人赞过
+蓝jiajia 走过夏天的柚子 deathluna AdminO_O 淮乐航 大爱卡卡罗特的海角
+分享给朋友
+
+
+
+ 
+评论
+
+请登录后发表评论：
+
+
+
+
+dreamfly619 7月4日 2:41：
+我觉得你可以在git diff 那里加上也可以用git diff commitID 比较. FYI.
+
+回复
+
+snuppy2013 6月7日 2:15：
+你好呀，好像readme.txt添加到版本库之后，文件不能修改了？
+
+回复
+
+elevensky 5月18日 0:03：
+Unix通用的diff格式不太了解搜索了下帖一下阮老师的博文 http://www.ruanyifeng.com/blog/2012/08/how_to_read_diff.html
+
+回复
+
+小郭学路 5月12日 11:35：
+最后一个例子已经commit了，再次进行git status不应该出现“nothing to commit (working directory clean)”，应该是“# Your branch is ahead of 'origin/master' by 1 commits.”吧
+
+回复
+
+BinaryHB 4月19日 18:14：
+@东方铃馨颂
+
+我是这么理解的：git像个管家一样，你给命令要干什么，得先让他知道命令内容是什么。比如说，你家里的布置你按照心意改了，git可不能直接自己就去改回到原来的样子。它需要你的允许和告知，或者说等待。不然，它即便是知道东西动了，但是也不会去理会，因为它不能。
+
+回复
+
+东方铃馨颂 3月3日 16:05：
+额，对于已经add 过了的追踪中的文件，有改动要提交，还要add 一次。 这和SVN的使用习惯有点不一样啊。0 0
+
+回复
+
+
+ 
+廖雪峰的官方网站©2014 - Feedback
